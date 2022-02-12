@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>quiz4.html</title>
+  </head>
+
+<body>
+
+<div id="checkGuess">
+  <h2>Quiz4: Make this return correct colors using fetch and php.</h2>
+  <div> Guess word: <input type="text" id="guessedWord"/></div>
+  <div> Result: <span id="checkGuessOutput"></span></div>
+  <button id = "button" onclick="checkGuess()">Use server to check the guess</button>  
+</div>
+<hr>
+
+</body>
+
+<script>
+  function checkGuess(){
+      inputText = document.getElementById('guessedWord').value;
+      async function checkGuessAndDetermineColors(guess) {
+	  console.log("Player's guess: ", guess);
+	  let myResponse = await fetch("quiz4.php?guess=" + inputText);
+	  let result = await myResponse.json();
+	  console.log("Result from server: ", result);
+	  document.getElementById('checkGuessOutput').innerHTML = JSON.stringify(result);
+      }
+      checkGuessAndDetermineColors(inputText);
+  }
+
+</script>
+
+</html>
